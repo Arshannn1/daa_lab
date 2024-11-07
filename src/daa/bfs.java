@@ -3,50 +3,54 @@ package daa;
 import java.util.*;
 
 public class bfs {
-    // Function to perform BFS traversal from the given start node
-    public static void bffs(Map<Integer, List<Integer>> graph, int startNode) {
-        // Set to keep track of visited nodes
-        Set<Integer> visited = new HashSet<>();
-        // Queue for BFS
-        Queue<Integer> queue = new LinkedList<>();
+    static Map<String, List<String>> graph = new HashMap<>();
+    static List<String> myQueue = new ArrayList<>();
+    static List<String> searched = new ArrayList<>();
 
-        // Add the start node to the queue and mark it as visited
-        queue.add(startNode);
-        visited.add(startNode);
+    public static void main(String[] args) {
+        // Define the graph
+        graph.put("A", Arrays.asList("B", "D"));
+        graph.put("B", Arrays.asList("F", "C", "A"));
+        graph.put("C", Arrays.asList("E", "G"));
+        graph.put("D", Arrays.asList("F"));
+        graph.put("F", Arrays.asList("A"));
+        graph.put("E", Arrays.asList("F"));
+        graph.put("G", Arrays.asList("E"));
 
-        // Perform BFS
-        while (!queue.isEmpty()) {
-            int node = queue.poll();
-            System.out.println("Visited node: " + node);
+        // Add the starting point to the queue
+        myQueue.add("A");
 
-            // Check if the current node exists in the graph
-            if (graph.containsKey(node)) {
-                // Loop through the neighbors of the current node
-                for (int neighbor : graph.get(node)) {
-                    // If the neighbor hasn't been visited yet, add it to the queue
-                    if (!visited.contains(neighbor)) {
-                        queue.add(neighbor);
-                        visited.add(neighbor);
-                    }
-                }
+        // Perform BFS traversal
+        bfs();
+
+        // Print the searched nodes and remaining queue
+        System.out.println("Visited nodes: " + searched);
+        System.out.println("Remaining queue: " + myQueue);
+    }
+
+    // BFS traversal function
+    public static void bfs() {
+        while (!myQueue.isEmpty()) {
+            String state = myQueue.remove(0);
+            if (!searched.contains(state)) {
+                System.out.println("Visited node: " + state);
+                myQueue.addAll(graph.get(state));
+                searched.add(state);
             }
         }
     }
-
-    public static void main(String[] args) {
-        // Example directed graph represented as an adjacency list
-        Map<Integer, List<Integer>> graph = new HashMap<>();
-        graph.put(0, Arrays.asList(1, 2));
-        graph.put(1, Arrays.asList(2,999));
-        graph.put(2, Arrays.asList(3));
-        // Node 3 has no outgoing edges
-
-        // Starting node for BFS
-        int startNode = 0;
-
-        // Perform BFS from the given starting node
-        System.out.println("BFS starting from node " + startNode + ":");
-        bffs(graph, startNode);
-    }
 }
-
+//
+//
+//public static void bfs() {
+//    while (!myQueue.isEmpty()) {
+//        String state = myQueue.remove(0);
+//        if (!searched.contains(state)) {
+//            System.out.println("Visited node: " + state);
+//            searched.add(state);
+//
+//            // Add neighbors to the queue only if they haven't been visited
+//            for (String neighbor : graph.get(state)) {
+//                if (!searched.contains(neighbor)) {
+//                    myQueue.add(neighbor);
+//                }

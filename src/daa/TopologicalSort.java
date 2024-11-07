@@ -3,7 +3,7 @@ package daa;
 import java.util.*;
 
 public class TopologicalSort {
-	List<String> deadEnds = new ArrayList<>();
+	//List<String> deadEnds = new ArrayList<>();
     // Recursive method to perform DFS
     public static void dfsRecursive(Map<String, List<String>> graph, String node, Set<String> visited,List<String> deadEnds) {
         // If the node has already been visited, return

@@ -12,10 +12,8 @@ public class FloydWarshallAlgorithm {
             for (int j = 0; j < n; j++) {
                 if (i == j) {
                     distance[i][j] = 0; // Distance to self is 0
-                } else if (graph[i][j] != 'x') {
-                    distance[i][j] = graph[i][j]; // Distance is the edge weight
                 } else {
-                    distance[i][j] = Integer.MAX_VALUE; // No edge, set to infinity
+                    distance[i][j] = graph[i][j]; // Distance is the edge weight
                 }
             }
         }
@@ -37,11 +35,12 @@ public class FloydWarshallAlgorithm {
 
     public static void main(String[] args) {
         // Adjacency matrix representation of the graph with edge weights
+        // Integer.MAX_VALUE represents no direct edge between nodes
         int[][] graph = {
-            {0, 9, -4, 'x'},
+            {0, 9, -4, Integer.MAX_VALUE},
             {6, 0, 1, 2},
-            {'x', 5, 0, 'x'},
-            {'x', 'x', 1, 0}        //this x means not possible to reach as of now, u can keep zero there or inf
+            {Integer.MAX_VALUE, 5, 0, Integer.MAX_VALUE},
+            {Integer.MAX_VALUE, Integer.MAX_VALUE, 1, 0}
         };
 
         int[][] shortestPaths = floydWarshall(graph);
@@ -51,7 +50,7 @@ public class FloydWarshallAlgorithm {
         for (int[] row : shortestPaths) {
             for (int value : row) {
                 if (value == Integer.MAX_VALUE) {
-                    System.out.print("x ");
+                    System.out.print("INF "); // Represent infinity for no connection
                 } else {
                     System.out.print(value + " ");
                 }
