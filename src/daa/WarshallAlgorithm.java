@@ -1,4 +1,11 @@
 package daa;
+
+//
+//Here's a summary of how the diagonal elements are set in these algorithms:
+//
+//Warshall's Algorithm (for transitive closure): Diagonal elements should be 1 because it’s about reachability. Every vertex is reachable from itself.
+//
+//Floyd-Warshall Algorithm (for shortest paths): Diagonal elements should be 0 because the shortest distance from a vertex to itself is zero.
 public class WarshallAlgorithm {
 
     // Method to compute the transitive closure
@@ -6,10 +13,15 @@ public class WarshallAlgorithm {
         int n = graph.length; // Number of vertices
         int[][] reach = new int[n][n];
 
-        // Initialize the reachability matrix as a copy of the graph
+        
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                reach[i][j] = graph[i][j];
+            	 if (i == j) {
+                    reach[i][j] = 1; 
+                 } else {
+                     reach[i][j] = graph[i][j]; // Distance is the edge weight
+                 }
+                
             }
         }
 

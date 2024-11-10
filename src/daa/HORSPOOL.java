@@ -4,23 +4,20 @@ import java.util.HashMap;
 
 public class HORSPOOL{
 
-    // Function to create the shift table using HashMap
+
     public static HashMap<Character, Integer> createShiftTable(String pattern) {
         HashMap<Character, Integer> shiftTable = new HashMap<>();
         int patternLength = pattern.length();
 
-        // Initialize all characters with pattern length
-//        for (char ch = 0; ch < 256; ch++) {
-//            shiftTable.put(ch, patternLength);
-//        }
-
-        // Update table with pattern-specific shifts
+    
         for (int i = 0; i < patternLength - 1; i++) {
             shiftTable.put(pattern.charAt(i), patternLength - 1 - i);
         }
 
         return shiftTable;
     }
+    
+    
 
     // Function to check if the string matches using the Horspool algorithm
     public static int horspoolSearch(String text, String pattern) {

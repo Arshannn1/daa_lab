@@ -20,6 +20,8 @@ public class dijstra {
 //    	    "f": {}
 //    	}
 
+    
+    
     static {
         graph.put("a", new HashMap<>() {{ put("b", 5); put("c", 2); }});
         graph.put("b", new HashMap<>() {{ put("d", 1); put("e", 6); }});

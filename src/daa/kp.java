@@ -44,7 +44,14 @@ public class kp{
                 }
             }
         }
-
+        
+        
+        // Fill DP table
+        for (int i = 1; i <= n; i++) {
+            for (int w = 1; w <= capacity; w++) {
+            	System.out.print(dp[i][w]);
+            }
+            System.out.println();}
         return dp[n][capacity];
     }
 

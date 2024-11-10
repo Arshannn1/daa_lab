@@ -1,0 +1,52 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class NQueens {
+    static int n = 4;
+    static char[][] board = new char[n][n];
+    static Set<Integer> dangerCol = new HashSet<>();
+    static Set<Integer> dangerDia = new HashSet<>();
+    static Set<Integer> dangerDia2 = new HashSet<>();
+
+    public static void main(String[] args) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                board[i][j] = '.';  // Initialize the board with '.' (empty spots)
+            }
+        }
+
+        solve(0);
+    }
+
+    static void solve(int r) {
+        if (r == n) {
+            // Print the board when a solution is found
+            for (int i = 0; i < n; i++) {
+                System.out.println(board[i]);
+            }
+            System.out.println("_______");
+            return;
+        }
+
+        for (int c = 0; c < n; c++) {
+            if (dangerCol.contains(c) || dangerDia.contains(r - c) || dangerDia2.contains(r + c)) {
+                continue;
+            }
+
+            // Mark the columns and diagonals as dangerous
+            dangerCol.add(c);
+            dangerDia.add(r - c);
+            dangerDia2.add(r + c);
+
+            // Place a queen and recursively solve the next row
+            board[r][c] = 'Q';
+            solve(r + 1);
+
+            // Backtrack by removing the queen and unmarking the columns and diagonals
+            dangerCol.remove(c);
+            dangerDia.remove(r - c);
+            dangerDia2.remove(r + c);
+            board[r][c] = '.';  // Reset the board
+        }
+    }
+}
