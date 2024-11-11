@@ -1,3 +1,5 @@
+package popo2;
+
 import java.util.*;
 
 public class tsppp {
@@ -73,3 +75,52 @@ public class tsppp {
         return bestResult;
     }
 }
+
+
+//import copy
+//
+//d = [[0, 10, 15, 20],
+//     [10, 0, 35, 25],
+//     [15, 35, 0, 30],
+//     [20, 25, 30, 0]]
+//
+//
+//def tsp(curr, to_visit,  memo, path):
+//    if not to_visit:
+//                    # Return to the starting point
+//        return d[curr][0], path + [0]  
+//    
+//    if (curr, tuple(to_visit)) in memo:
+//        return memo[(curr, tuple(to_visit))]  # Retrieve saved result if exists
+//    
+//    ans = float('inf')
+//    best_path = None  # Variable to store the best path
+//    
+//    for k in to_visit:
+//        new_to_visit = copy.copy(to_visit)
+//        new_to_visit.remove(k)
+//        
+//        # Get the cost and the path from this city
+//        new_cost, sub_path = tsp(k, new_to_visit, memo, path + [k])
+//        
+//        new_cost += d[curr][k]
+//        
+//        if new_cost < ans:
+//            ans = new_cost
+//            best_path = sub_path  # Record the best path
+//
+//    memo[(curr, tuple(to_visit))] = (ans, best_path)
+//    return ans, best_path
+//
+//
+//n = len(d)
+//memo = {}
+//start_city = 0
+//to_visit = list(range(1, n))  # Cities to visit except the start city
+//
+//# Call the tsp function
+//min_cost, best_path = tsp(start_city, to_visit, memo, [start_city])
+//
+//# Print the results
+//print("Minimum cost:", min_cost)
+//print("Path:", best_path)
