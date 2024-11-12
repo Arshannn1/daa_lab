@@ -2,81 +2,137 @@ package popo2;
 
 import java.util.*;
 
-class Node
-{
-	int key;
-	Node left; Node right;
-	
-	public Node(int item)
-	{
-		key = item;
-		left = right = null;
 
-	}
+class Node
+{ int key;
+Node left,right;
+
+public Node(int t)
+{key = t;
+left = null;
+right = null;
+
+}
 }
 
-public class BinarySearchTree {
-	
-Node root;
 
+public class BinarySearchTree
+{
+	Node root;
+	
 	public BinarySearchTree()
-		{root = null;
-		}
+			{
+					root = null;
+			}
 	
-	void insert(int key ) {
-		root = insertfunc(root,key);
-	}
+	void insert(int item)
+			{
+		      root = insertrec(root,item);
+			}	
 	
-	Node insertfunc(Node root,int key)
+	Node insertrec(Node root, int k)
 	{
-		
 		if (root == null)
 		{
-			Node a = new Node(key);
-			return a;
-			
+			Node n = new Node(k);
+			return n;
 		}
-		if (key < root.key)
+		
+		else if (root.key > k)
 		{
-			root.left = insertfunc(root.left,key);
+			root.left = insertrec(root.left,k);
 		}
-		else
+		
+		else if(root.key < k)
 		{
-			root.right = insertfunc(root.right,key);
+			root.right = insertrec(root.right,k);
 		}
+		
 		
 		return root;
 	}
 	
+	int find_min(Node root)
+	{
+		while(root.left != null)
+		{
+			root = root.left;
+		}
+		return root.key;
+	}
+	
+	void delete(int item)
+		{
+			root = deleterec(root, item);
+		}
+	
+	Node deleterec(Node root, int k)
+		{
+		 if (root == null)
+		 {
+			 return root;
+		 }
+		 
+		 else if (root.key < k)
+		 {
+			 root.right  = deleterec(root.right,k);
+		 }
+		 
+		 else if (root.key > k)
+		 {
+			 root.left = deleterec(root.left,k);
+		 }
+		 
+		 else
+		 {
+			 if (root.left == null)
+			 {
+				 return root.right;
+			 }
+			 else if(root.right == null)
+			 {
+				return root.left; 
+			 }
+			 
+			 else
+			 {
+				 int min_val = find_min(root.right);
+				 root.key = min_val;
+				 root.right  = deleterec(root.right,min_val); 
+			 }
+			 
+		 }
+		 return root;
+	 
+	}
+	
 	
 	void inorder()
-	{  
-		inordertraversal(root);
-	}
-	
-	void inordertraversal(Node root)
-	{
-		if (root != null)
 		{
-			inordertraversal(root.left);
-			System.out.print(root.key+ " ");
-			inordertraversal(root.right);
+			inordermove(root);
 		}
-	}
+	
+	void inordermove(Node root)
+		{
+			if (root!=null)
+			{
+				inordermove(root.left);
+				System.out.println(root.key);
+				inordermove(root.right);
+			}
+		}
 	
 	
 	
-	public static void main(String[] args)
+	
+	
+	
+	public static void main (String[] args)
 	{
-		Scanner sc = new Scanner(System.in);
-		BinarySearchTree bt = new BinarySearchTree();
-		bt.insert(10);
-		bt.insert(77);
-		bt.insert(8);
-		bt.inorder();
-	}
+		BinarySearchTree abc = new BinarySearchTree();
+		abc.insert(1117);
+		abc.insert(9);
+		abc.insert(88);
+		abc.inorder();}
 	
 	}
-	
-	
-
