@@ -70,6 +70,8 @@
 
 package popo2;
 
+import java.util.Collections;
+
 public class heapsort {
     
     												// Method to build the heap (Min-Heap) with 1-based indexing
@@ -81,10 +83,16 @@ public class heapsort {
         }
     }
 
+     public static void swap(int arr[],int  i,int j)
+     {
+    	 int temp = arr[i];
+    	 arr[i] = arr[j];
+    	 arr[j] = temp;
+     }
    																	// Helper method to move an element down in the heap for Min-Heap
     private static void siftDown(int k, int[] arr, int n) {
-        int value = arr[k];
-        while (k <= n / 2) {											 // Loop until `k` has no children
+      
+        while (2*k <= n ) {											 // Loop until `k` has no children
             int leftChild = 2 * k;
             int rightChild = leftChild + 1;
             int smallerChild = leftChild;
@@ -95,15 +103,16 @@ public class heapsort {
             }
 
             																		// If value is smaller than or equal to the smaller child, we're done
-            if (value <= arr[smallerChild]) {
+            if (arr[k] <= arr[smallerChild]) {
                 break;
             }
 
             																	// Move the smaller child up
-            arr[k] = arr[smallerChild];
+            swap(arr, smallerChild, k);
+            
             k = smallerChild;
         }
-        arr[k] = value;
+        
     }
 
     																						// Heapsort method that sorts the array in ascending order
